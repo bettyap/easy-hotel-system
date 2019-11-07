@@ -1,0 +1,98 @@
+﻿@model EasyHotelSystem.Models.Payment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Payment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumQuarto" class="control-label"></label>
+                <input asp-for="NumQuarto" class="form-control" />
+                <span asp-validation-for="NumQuarto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoQuarto" class="control-label"></label>
+                <input asp-for="TipoQuarto" class="form-control" />
+                <span asp-validation-for="TipoQuarto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeHos" class="control-label"></label>
+                <input asp-for="NomeHos" class="form-control" />
+                <span asp-validation-for="NomeHos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QtdCriancas" class="control-label"></label>
+                <input asp-for="QtdCriancas" class="form-control" />
+                <span asp-validation-for="QtdCriancas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QtdAdu" class="control-label"></label>
+                <input asp-for="QtdAdu" class="form-control" />
+                <span asp-validation-for="QtdAdu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCheckin" class="control-label"></label>
+                <input asp-for="DataCheckin" class="form-control" />
+                <span asp-validation-for="DataCheckin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCheckout" class="control-label"></label>
+                <input asp-for="DataCheckout" class="form-control" />
+                <span asp-validation-for="DataCheckout" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HrCheckin" class="control-label"></label>
+                <input asp-for="HrCheckin" class="form-control" />
+                <span asp-validation-for="HrCheckin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HrCheckout" class="control-label"></label>
+                <input asp-for="HrCheckout" class="form-control" />
+                <span asp-validation-for="HrCheckout" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CpfFunc" class="control-label"></label>
+                <input asp-for="CpfFunc" class="form-control" />
+                <span asp-validation-for="CpfFunc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CpfHos" class="control-label"></label>
+                <input asp-for="CpfHos" class="form-control" />
+                <span asp-validation-for="CpfHos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taxa" class="control-label"></label>
+                <input asp-for="Taxa" class="form-control" />
+                <span asp-validation-for="Taxa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPag" class="control-label"></label>
+                <input asp-for="FormaPag" class="form-control" />
+                <span asp-validation-for="FormaPag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

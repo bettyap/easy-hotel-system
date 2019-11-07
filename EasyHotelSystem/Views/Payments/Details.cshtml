@@ -1,0 +1,102 @@
+﻿@model EasyHotelSystem.Models.Payment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumQuarto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumQuarto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoQuarto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoQuarto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeHos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NomeHos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdCriancas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QtdCriancas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.QtdAdu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QtdAdu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCheckin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataCheckin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCheckout)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DataCheckout)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HrCheckin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HrCheckin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HrCheckout)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HrCheckout)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CpfFunc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CpfFunc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CpfHos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CpfHos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Taxa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Taxa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FormaPag)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FormaPag)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CodPagamento">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

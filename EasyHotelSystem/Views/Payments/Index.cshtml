@@ -1,0 +1,113 @@
+﻿@model IEnumerable<EasyHotelSystem.Models.Payment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumQuarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoQuarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeHos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdCriancas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtdAdu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCheckin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCheckout)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HrCheckin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HrCheckout)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpfFunc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpfHos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taxa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormaPag)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumQuarto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoQuarto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeHos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdCriancas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QtdAdu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCheckin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCheckout)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HrCheckin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HrCheckout)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CpfFunc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CpfHos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taxa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormaPag)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CodPagamento">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CodPagamento">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CodPagamento">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
