@@ -9,93 +9,85 @@ using EasyHotelSystem.Models;
 
 namespace EasyHotelSystem.Controllers
 {
-    public class EmployeesController : Controller
+    public class EmployeeReservasController : Controller
     {
         private readonly EasyHotelSystemContext _context;
 
-        public EmployeesController(EasyHotelSystemContext context)
+        public EmployeeReservasController(EasyHotelSystemContext context)
         {
             _context = context;
         }
 
-        // GET: Employees
+        // GET: EmployeeReservas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employee.ToListAsync());
+            return View(await _context.EmployeeReserva.ToListAsync());
         }
 
-        // GET: Employees/Details/5
-        public async Task<IActionResult> Details(long? id)
+        // GET: EmployeeReservas/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employee.Include(m => m.ListaChecksRealizados).ThenInclude(m => m.Pagamento)
-                .FirstOrDefaultAsync(m => m.CpfFunc == id);
-            var employee1 = await _context.Employee.Include(m => m.ListaReservas).ThenInclude(m => m.Reservas)
-                .FirstOrDefaultAsync(m => m.CpfFunc == id);
-            if (employee == null)
+            var employeeReserva = await _context.EmployeeReserva
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (employeeReserva == null)
             {
                 return NotFound();
             }
 
-            if (employee1 == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
-
+            return View(employeeReserva);
         }
 
-        // GET: Employees/Create
+        // GET: EmployeeReservas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: EmployeeReservas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CpfFunc,Nome,Logradouro,Bairro,Complemento,Cidade,Cep,Telefone,DtNasc,DtAdmissao,Email,Cargo")] Employee employee)
+        public async Task<IActionResult> Create([Bind("FuncID,ResID,Id")] EmployeeReserva employeeReserva)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
+                _context.Add(employeeReserva);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View(employeeReserva);
         }
 
-        // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        // GET: EmployeeReservas/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employee.FindAsync(id);
-            if (employee == null)
+            var employeeReserva = await _context.EmployeeReserva.FindAsync(id);
+            if (employeeReserva == null)
             {
                 return NotFound();
             }
-            return View(employee);
+            return View(employeeReserva);
         }
 
-        // POST: Employees/Edit/5
+        // POST: EmployeeReservas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("CpfFunc,Nome,Logradouro,Bairro,Complemento,Cidade,Cep,Telefone,DtNasc,DtAdmissao,Email,Cargo")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("FuncID,ResID,Id")] EmployeeReserva employeeReserva)
         {
-            if (id != employee.CpfFunc)
+            if (id != employeeReserva.Id)
             {
                 return NotFound();
             }
@@ -104,12 +96,12 @@ namespace EasyHotelSystem.Controllers
             {
                 try
                 {
-                    _context.Update(employee);
+                    _context.Update(employeeReserva);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.CpfFunc))
+                    if (!EmployeeReservaExists(employeeReserva.Id))
                     {
                         return NotFound();
                     }
@@ -120,41 +112,41 @@ namespace EasyHotelSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View(employeeReserva);
         }
 
-        // GET: Employees/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        // GET: EmployeeReservas/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employee
-                .FirstOrDefaultAsync(m => m.CpfFunc == id);
-            if (employee == null)
+            var employeeReserva = await _context.EmployeeReserva
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (employeeReserva == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(employeeReserva);
         }
 
-        // POST: Employees/Delete/5
+        // POST: EmployeeReservas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employee.FindAsync(id);
-            _context.Employee.Remove(employee);
+            var employeeReserva = await _context.EmployeeReserva.FindAsync(id);
+            _context.EmployeeReserva.Remove(employeeReserva);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmployeeExists(long id)
+        private bool EmployeeReservaExists(int id)
         {
-            return _context.Employee.Any(e => e.CpfFunc == id);
+            return _context.EmployeeReserva.Any(e => e.Id == id);
         }
     }
 }

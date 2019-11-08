@@ -17,7 +17,7 @@ namespace EasyHotelSystem.Models
         private Int64 cpfHos;
         private int numQuarto;
 
-        private ICollection<Room> listaQuartos;
+     
 
 
         [Key]
@@ -56,6 +56,6 @@ namespace EasyHotelSystem.Models
         public int NumQuarto { get => numQuarto; set => numQuarto = value; }
 
 
-        public ICollection<Room> ListaQuartos { get => listaQuartos; set => listaQuartos = value; }
+        
     }
 }

@@ -25,5 +25,9 @@ namespace EasyHotelSystem.Models
         public DbSet<EasyHotelSystem.Models.Reserva> Reserva { get; set; }
 
         public DbSet<EasyHotelSystem.Models.Room> Room { get; set; }
+
+        public DbSet<EasyHotelSystem.Models.EmployeePayment> EmployeePayment { get; set; }
+
+        public DbSet<EasyHotelSystem.Models.EmployeeReserva> EmployeeReserva { get; set; }
     }
 }

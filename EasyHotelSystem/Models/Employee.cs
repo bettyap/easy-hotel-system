@@ -22,8 +22,8 @@ namespace EasyHotelSystem.Models
         private string email;
         private string cargo;
 
-        private ICollection<Payment> listaChecksRealizados;
-        private ICollection<Reserva> listaReservas;
+        private ICollection<EmployeePayment> listaChecksRealizados;
+        private ICollection<EmployeeReserva> listaReservas;
 
         [Key]
         [Range(00000000000, 99999999999)]
@@ -85,9 +85,9 @@ namespace EasyHotelSystem.Models
         public string Cargo { get => cargo; set => cargo = value; }
 
 
-        public ICollection<Payment> ListaChecksRealizados { get => listaChecksRealizados; set => listaChecksRealizados = value; }
+        public ICollection<EmployeePayment> ListaChecksRealizados { get => listaChecksRealizados; set => listaChecksRealizados = value; }
 
 
-        public ICollection<Reserva> ListaReservas { get => listaReservas; set => listaReservas = value; }
+        public ICollection<EmployeeReserva> ListaReservas { get => listaReservas; set => listaReservas = value; }
     }
 }

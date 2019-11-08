@@ -4,14 +4,16 @@ using EasyHotelSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyHotelSystem.Migrations
 {
     [DbContext(typeof(EasyHotelSystemContext))]
-    partial class EasyHotelSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20191108160945_EmployeePayment")]
+    partial class EmployeePayment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,29 +87,6 @@ namespace EasyHotelSystem.Migrations
                     b.HasIndex("RecepcionistaCpfFunc");
 
                     b.ToTable("EmployeePayment");
-                });
-
-            modelBuilder.Entity("EasyHotelSystem.Models.EmployeeReserva", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FuncID");
-
-                    b.Property<long?>("RecepcionistaCpfFunc");
-
-                    b.Property<int>("ResID");
-
-                    b.Property<int?>("ReservasCodReserva");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecepcionistaCpfFunc");
-
-                    b.HasIndex("ReservasCodReserva");
-
-                    b.ToTable("EmployeeReserva");
                 });
 
             modelBuilder.Entity("EasyHotelSystem.Models.Escorts", b =>
@@ -329,17 +308,6 @@ namespace EasyHotelSystem.Migrations
                     b.HasOne("EasyHotelSystem.Models.Employee", "Recepcionista")
                         .WithMany("ListaChecksRealizados")
                         .HasForeignKey("RecepcionistaCpfFunc");
-                });
-
-            modelBuilder.Entity("EasyHotelSystem.Models.EmployeeReserva", b =>
-                {
-                    b.HasOne("EasyHotelSystem.Models.Employee", "Recepcionista")
-                        .WithMany()
-                        .HasForeignKey("RecepcionistaCpfFunc");
-
-                    b.HasOne("EasyHotelSystem.Models.Reserva", "Reservas")
-                        .WithMany()
-                        .HasForeignKey("ReservasCodReserva");
                 });
 
             modelBuilder.Entity("EasyHotelSystem.Models.Escorts", b =>
