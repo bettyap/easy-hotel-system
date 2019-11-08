@@ -32,7 +32,7 @@ namespace EasyHotelSystem.Controllers
                 return NotFound();
             }
 
-            var room = await _context.Room
+            var room = await _context.Room.Include(m => m.ListaReservas).ThenInclude(m => m.Reservas)
                 .FirstOrDefaultAsync(m => m.NumQuarto == id);
             if (room == null)
             {

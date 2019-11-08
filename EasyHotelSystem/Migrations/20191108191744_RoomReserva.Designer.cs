@@ -4,14 +4,16 @@ using EasyHotelSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EasyHotelSystem.Migrations
 {
     [DbContext(typeof(EasyHotelSystemContext))]
-    partial class EasyHotelSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20191108191744_RoomReserva")]
+    partial class RoomReserva
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,6 +162,8 @@ namespace EasyHotelSystem.Migrations
 
                     b.HasKey("CpfAcom");
 
+                    b.HasIndex("CpfHos");
+
                     b.ToTable("Escorts");
                 });
 
@@ -216,52 +220,6 @@ namespace EasyHotelSystem.Migrations
                     b.ToTable("Guest");
                 });
 
-            modelBuilder.Entity("EasyHotelSystem.Models.GuestEscorts", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("AcompanhantesCpfAcom");
-
-                    b.Property<int>("HosID");
-
-                    b.Property<long?>("HospedeCpfHos");
-
-                    b.Property<int>("PagID");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AcompanhantesCpfAcom");
-
-                    b.HasIndex("HospedeCpfHos");
-
-                    b.ToTable("GuestEscorts");
-                });
-
-            modelBuilder.Entity("EasyHotelSystem.Models.GuestPayment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("HosID");
-
-                    b.Property<long?>("HospedeCpfHos");
-
-                    b.Property<int>("PagID");
-
-                    b.Property<int?>("PagamentoCodPagamento");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HospedeCpfHos");
-
-                    b.HasIndex("PagamentoCodPagamento");
-
-                    b.ToTable("GuestPayment");
-                });
-
             modelBuilder.Entity("EasyHotelSystem.Models.Payment", b =>
                 {
                     b.Property<int>("CodPagamento")
@@ -305,6 +263,8 @@ namespace EasyHotelSystem.Migrations
 
                     b.HasKey("CodPagamento");
 
+                    b.HasIndex("CpfHos");
+
                     b.ToTable("Payment");
                 });
 
@@ -331,6 +291,8 @@ namespace EasyHotelSystem.Migrations
                     b.Property<int>("QtdAcomp");
 
                     b.HasKey("CodReserva");
+
+                    b.HasIndex("NumQuarto");
 
                     b.ToTable("Reserva");
                 });
@@ -403,32 +365,34 @@ namespace EasyHotelSystem.Migrations
                         .HasForeignKey("ReservasCodReserva");
                 });
 
-            modelBuilder.Entity("EasyHotelSystem.Models.GuestEscorts", b =>
+            modelBuilder.Entity("EasyHotelSystem.Models.Escorts", b =>
                 {
-                    b.HasOne("EasyHotelSystem.Models.Escorts", "Acompanhantes")
-                        .WithMany()
-                        .HasForeignKey("AcompanhantesCpfAcom");
-
-                    b.HasOne("EasyHotelSystem.Models.Guest", "Hospede")
+                    b.HasOne("EasyHotelSystem.Models.Guest")
                         .WithMany("ListaAcompanhantes")
-                        .HasForeignKey("HospedeCpfHos");
+                        .HasForeignKey("CpfHos")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EasyHotelSystem.Models.GuestPayment", b =>
+            modelBuilder.Entity("EasyHotelSystem.Models.Payment", b =>
                 {
-                    b.HasOne("EasyHotelSystem.Models.Guest", "Hospede")
+                    b.HasOne("EasyHotelSystem.Models.Guest")
                         .WithMany("ListaPagamentos")
-                        .HasForeignKey("HospedeCpfHos");
+                        .HasForeignKey("CpfHos")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("EasyHotelSystem.Models.Payment", "Pagamento")
-                        .WithMany()
-                        .HasForeignKey("PagamentoCodPagamento");
+            modelBuilder.Entity("EasyHotelSystem.Models.Reserva", b =>
+                {
+                    b.HasOne("EasyHotelSystem.Models.Room")
+                        .WithMany("ListaReservas")
+                        .HasForeignKey("NumQuarto")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EasyHotelSystem.Models.RoomReserva", b =>
                 {
                     b.HasOne("EasyHotelSystem.Models.Room", "Quarto")
-                        .WithMany("ListaReservas")
+                        .WithMany()
                         .HasForeignKey("QuartoNumQuarto");
 
                     b.HasOne("EasyHotelSystem.Models.Reserva", "Reservas")

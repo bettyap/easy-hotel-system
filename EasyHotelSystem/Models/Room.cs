@@ -14,7 +14,7 @@ namespace EasyHotelSystem.Models
         private decimal valorDiaria;
         private int codReserva;
 
-        private ICollection<Reserva> listaReservas;
+        private ICollection<RoomReserva> listaReservas;
 
         [Key]
         [Display(Name = "Número do quarto:")]
@@ -39,6 +39,6 @@ namespace EasyHotelSystem.Models
         public int CodReserva { get => codReserva; set => codReserva = value; }
 
 
-        public ICollection<Reserva> ListaReservas { get => listaReservas; set => listaReservas = value; }
+        public ICollection<RoomReserva> ListaReservas { get => listaReservas; set => listaReservas = value; }
     }
 }

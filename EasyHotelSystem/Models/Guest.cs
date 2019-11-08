@@ -25,8 +25,8 @@ namespace EasyHotelSystem.Models
         private string email;
         private Int64 cpfAcomp;
 
-        private ICollection<Payment> listaPagamentos;
-        private ICollection<Escorts> listaAcompanhantes;
+        private ICollection<GuestPayment> listaPagamentos;
+        private ICollection<GuestEscorts> listaAcompanhantes;
 
         [Key]
         [Range(00000000000, 99999999999)]
@@ -100,9 +100,9 @@ namespace EasyHotelSystem.Models
         public long CpfAcomp { get => cpfAcomp; set => cpfAcomp = value; }
 
 
-        public ICollection<Payment> ListaPagamentos { get => listaPagamentos; set => listaPagamentos = value; }
+        public ICollection<GuestPayment> ListaPagamentos { get => listaPagamentos; set => listaPagamentos = value; }
 
 
-        public ICollection<Escorts> ListaAcompanhantes { get => listaAcompanhantes; set => listaAcompanhantes = value; }
+        public ICollection<GuestEscorts> ListaAcompanhantes { get => listaAcompanhantes; set => listaAcompanhantes = value; }
     }
 }

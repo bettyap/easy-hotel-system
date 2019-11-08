@@ -9,92 +9,85 @@ using EasyHotelSystem.Models;
 
 namespace EasyHotelSystem.Controllers
 {
-    public class GuestsController : Controller
+    public class RoomReservasController : Controller
     {
         private readonly EasyHotelSystemContext _context;
 
-        public GuestsController(EasyHotelSystemContext context)
+        public RoomReservasController(EasyHotelSystemContext context)
         {
             _context = context;
         }
 
-        // GET: Guests
+        // GET: RoomReservas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Guest.ToListAsync());
+            return View(await _context.RoomReserva.ToListAsync());
         }
 
-        // GET: Guests/Details/5
-        public async Task<IActionResult> Details(long? id)
+        // GET: RoomReservas/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var guest = await _context.Guest.Include(m => m.ListaPagamentos).ThenInclude(m => m.Pagamento)
-                .FirstOrDefaultAsync(m => m.CpfHos == id);
-            if (guest == null)
+            var roomReserva = await _context.RoomReserva
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (roomReserva == null)
             {
                 return NotFound();
             }
 
-            var guest1 = await _context.Guest.Include(m => m.ListaAcompanhantes).ThenInclude(m => m.Acompanhantes)
-                .FirstOrDefaultAsync(m => m.CpfHos == id);
-            if (guest1 == null)
-            {
-                return NotFound();
-            }
-
-            return View(guest);
+            return View(roomReserva);
         }
 
-        // GET: Guests/Create
+        // GET: RoomReservas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Guests/Create
+        // POST: RoomReservas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CpfHos,Nome,Rg,Nascim,Genero,Profissao,Logradouro,Bairro,Complemento,Cidade,Cep,Telefone,Celular,Email,CpfAcomp")] Guest guest)
+        public async Task<IActionResult> Create([Bind("QuarID,ResID,Id")] RoomReserva roomReserva)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(guest);
+                _context.Add(roomReserva);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(guest);
+            return View(roomReserva);
         }
 
-        // GET: Guests/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        // GET: RoomReservas/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var guest = await _context.Guest.FindAsync(id);
-            if (guest == null)
+            var roomReserva = await _context.RoomReserva.FindAsync(id);
+            if (roomReserva == null)
             {
                 return NotFound();
             }
-            return View(guest);
+            return View(roomReserva);
         }
 
-        // POST: Guests/Edit/5
+        // POST: RoomReservas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("CpfHos,Nome,Rg,Nascim,Genero,Profissao,Logradouro,Bairro,Complemento,Cidade,Cep,Telefone,Celular,Email,CpfAcomp")] Guest guest)
+        public async Task<IActionResult> Edit(int id, [Bind("QuarID,ResID,Id")] RoomReserva roomReserva)
         {
-            if (id != guest.CpfHos)
+            if (id != roomReserva.Id)
             {
                 return NotFound();
             }
@@ -103,12 +96,12 @@ namespace EasyHotelSystem.Controllers
             {
                 try
                 {
-                    _context.Update(guest);
+                    _context.Update(roomReserva);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GuestExists(guest.CpfHos))
+                    if (!RoomReservaExists(roomReserva.Id))
                     {
                         return NotFound();
                     }
@@ -119,41 +112,41 @@ namespace EasyHotelSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(guest);
+            return View(roomReserva);
         }
 
-        // GET: Guests/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        // GET: RoomReservas/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var guest = await _context.Guest
-                .FirstOrDefaultAsync(m => m.CpfHos == id);
-            if (guest == null)
+            var roomReserva = await _context.RoomReserva
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (roomReserva == null)
             {
                 return NotFound();
             }
 
-            return View(guest);
+            return View(roomReserva);
         }
 
-        // POST: Guests/Delete/5
+        // POST: RoomReservas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var guest = await _context.Guest.FindAsync(id);
-            _context.Guest.Remove(guest);
+            var roomReserva = await _context.RoomReserva.FindAsync(id);
+            _context.RoomReserva.Remove(roomReserva);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GuestExists(long id)
+        private bool RoomReservaExists(int id)
         {
-            return _context.Guest.Any(e => e.CpfHos == id);
+            return _context.RoomReserva.Any(e => e.Id == id);
         }
     }
 }
