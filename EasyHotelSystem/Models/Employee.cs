@@ -22,6 +22,9 @@ namespace EasyHotelSystem.Models
         private string email;
         private string cargo;
 
+        private ICollection<Payment> listaChecksRealizados;
+        private ICollection<Reserva> listaReservas;
+
         [Key]
         [Range(00000000000, 99999999999)]
         [Display(Name = "CPF:")]
@@ -80,5 +83,11 @@ namespace EasyHotelSystem.Models
         [MaxLength(15, ErrorMessage = "O máximo são 15 caracteres!")]
         [Display(Name = "Cargo:")]
         public string Cargo { get => cargo; set => cargo = value; }
+
+
+        public ICollection<Payment> ListaChecksRealizados { get => listaChecksRealizados; set => listaChecksRealizados = value; }
+
+
+        public ICollection<Reserva> ListaReservas { get => listaReservas; set => listaReservas = value; }
     }
 }

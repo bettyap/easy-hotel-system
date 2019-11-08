@@ -17,20 +17,32 @@ namespace EasyHotelSystem.Models
         private Int64 cpfHos;
         private int numQuarto;
 
+        private ICollection<Room> listaQuartos;
+
 
         [Key]
+        [Range(000000,999999)]
+        [Display(Name ="Código da Reserva:")]
         public int CodReserva { get => codReserva; set => codReserva = value; }
 
-
+        [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [StringLength(50, ErrorMessage = "O máximo são 50 caracteres!")]
+        [Display(Name = "Nome do Hóspede:")]
         public string NomeHos { get => nomeHos; set => nomeHos = value; }
 
-
+        [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data da Entrada:")]
         public DateTime DataCheckin { get => dataCheckin; set => dataCheckin = value; }
 
-
+        [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data da Saída:")]
         public DateTime DataCheckout { get => dataCheckout; set => dataCheckout = value; }
 
-
+        [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [Range(0, 10)]
+        [Display(Name = "Quantidade de acompanhantes:")]
         public int QtdAcomp { get => qtdAcomp; set => qtdAcomp = value; }
 
 
@@ -39,7 +51,11 @@ namespace EasyHotelSystem.Models
 
         public long CpfHos { get => cpfHos; set => cpfHos = value; }
 
-
+        [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [Display(Name = "Número do quarto:")]
         public int NumQuarto { get => numQuarto; set => numQuarto = value; }
+
+
+        public ICollection<Room> ListaQuartos { get => listaQuartos; set => listaQuartos = value; }
     }
 }
